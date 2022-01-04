@@ -6,20 +6,21 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     private Vector3 _defaultPos;
+    [SerializeField]
     private BallController _ballController;
     [SerializeField] private GameObject _ball;
     [SerializeField] private GameObject _arrow;
     [SerializeField] private float _maxBottom = -4f;
+    [SerializeField] private float _maxTop = 0.0f;
     [SerializeField] private float _maxLeft = -5f;
     [SerializeField] private float _maxRight = 5f;
     private MeshRenderer _meshRenderer;
     private BoxCollider _boxCollider;
+    [SerializeField]
     private UIController _uiController;
 
     private void Awake()
     {
-        _ballController = FindObjectOfType<BallController>();
-        _uiController = FindObjectOfType<UIController>();
         _defaultPos = transform.position;
         _meshRenderer = GetComponent<MeshRenderer>();
         _boxCollider = GetComponent<BoxCollider>();
@@ -28,7 +29,15 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        MovePlayer();
+        if (Time.timeScale == 0) return;
+        else MovePlayer();
+        
+        if (_ballController._returnPlayerAvaliable == true)
+        {
+            ReturnPlayer();
+            _ballController._returnPlayerAvaliable = false;
+        }
+        
     }
 
     private void MovePlayer()
@@ -44,7 +53,7 @@ public class InputManager : MonoBehaviour
                     Vector3 touchPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, transform.position.y, touch.position.y));
                 
                     transform.position = Vector3.Lerp(transform.position, new Vector3(-Mathf.Clamp(touchPosition.x, _maxLeft, _maxRight), 
-                        transform.position.y,  Mathf.Clamp(touchPosition.z, _maxBottom, 0.0f)), Time.deltaTime);
+                        transform.position.y,  Mathf.Clamp(touchPosition.z, _maxBottom, _maxTop)), Time.deltaTime);
                 
                     _arrow.transform.localScale =
                         new Vector2(((transform.position.z-_defaultPos.z)/4),

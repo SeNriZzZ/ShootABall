@@ -967,7 +967,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795937906}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c4114ef41597ffe48be904cafc5c31da, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1062,7 +1062,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897765119}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c4114ef41597ffe48be904cafc5c31da, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1872,7 +1872,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374356846}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c4114ef41597ffe48be904cafc5c31da, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2062,6 +2062,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5912240831948170544, guid: 6644621dd54c6b046a9835a7b74170d7, type: 3}
   m_PrefabInstance: {fileID: 3675493506295047269}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1755005256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8008399354891998574, guid: 6644621dd54c6b046a9835a7b74170d7, type: 3}
+  m_PrefabInstance: {fileID: 3675493506295047269}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755005255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c05f575f9f75ca244ba00e1790c1de0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1755005261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6332325957927215168, guid: 6644621dd54c6b046a9835a7b74170d7, type: 3}
@@ -2085,7 +2096,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ball: {fileID: 1755005255}
+  _ballController: {fileID: 1755005256}
   speed: 2
+  _minPos: 8
+  _maxFloat: 12
 --- !u!1 &1945320945
 GameObject:
   m_ObjectHideFlags: 0
@@ -2302,11 +2316,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf625792233f55b4f8d0990310ed88ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ballController: {fileID: 1755005256}
   _ball: {fileID: 1755005255}
   _arrow: {fileID: 4717348}
   _maxBottom: -4
+  _maxTop: 0
   _maxLeft: 5
   _maxRight: -5
+  _uiController: {fileID: 1117118142}
 --- !u!1 &2085385210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,7 +2364,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085385210}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c4114ef41597ffe48be904cafc5c31da, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2534,6 +2551,14 @@ PrefabInstance:
       propertyPath: _isLaunched
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8008399354891998574, guid: 6644621dd54c6b046a9835a7b74170d7, type: 3}
+      propertyPath: _uiController
+      value: 
+      objectReference: {fileID: 1117118142}
+    - target: {fileID: 8008399354891998574, guid: 6644621dd54c6b046a9835a7b74170d7, type: 3}
+      propertyPath: _enemyController
+      value: 
+      objectReference: {fileID: 1908205870}
     - target: {fileID: 8008399354891998574, guid: 6644621dd54c6b046a9835a7b74170d7, type: 3}
       propertyPath: _enemyBlocks.Array.size
       value: 3

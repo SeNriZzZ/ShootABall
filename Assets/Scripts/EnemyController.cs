@@ -7,12 +7,14 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private GameObject _ball;
     private Vector3 _defaultPos;
+    [SerializeField]
     private BallController _ballController;
     public float speed = 2f;
+    [SerializeField] private float _minPos = 8f;
+    [SerializeField] private float _maxFloat = 12f;
     private void Start()
     {
         _defaultPos = transform.position;
-        _ballController = FindObjectOfType<BallController>();
     }
 
     private void Update()
@@ -25,7 +27,7 @@ public class EnemyController : MonoBehaviour
         var position = transform.position;
         if (_ballController.level > 4)
         {
-            position.z = Mathf.Clamp(_ball.transform.position.z, 8f, 12f);
+            position.z = Mathf.Clamp(_ball.transform.position.z, _minPos, _maxFloat);
         }
         Vector3 target = new Vector3(_ball.transform.position.x, position.y, position.z);
         if (_ballController._isLaunched == true)

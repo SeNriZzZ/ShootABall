@@ -15,25 +15,26 @@ public class BallController : MonoBehaviour
     private int _enemyBlocksCount = 3;
     private Rigidbody _rb;
     [SerializeField] private GameObject _arrow;
+    [SerializeField]
     private EnemyController _enemyController;
+    [SerializeField]
     private UIController _uiController;
     public int level = 1;
-
-    private InputManager _inputManager;
+    [SerializeField] private float _ballSpeed = 20f;
+    [SerializeField] private float _enemySpeedIncrement = 0.05f;
+    public bool _returnPlayerAvaliable = false;
+    
 
     private void Awake()
     {
-        _inputManager = FindObjectOfType<InputManager>();
         _rb = gameObject.GetComponent<Rigidbody>();
         _enemyPos = _enemy.transform.position;
         _defaultPos = transform.position;
-        _enemyController = FindObjectOfType<EnemyController>();
-        _uiController = FindObjectOfType<UIController>();
+        _uiController.UpdateText(level);
     }
 
     private void Update()
     {
-        _uiController.UpdateText(level);
         if (_enemyBlocksCount == 0)
         {
             for (int i = 0; i < 3; i++)
@@ -41,8 +42,9 @@ public class BallController : MonoBehaviour
                 _enemyBlocks[i].SetActive(true);
             }
             _enemyBlocksCount = 3;
-            _enemyController.speed += 0.5f;
+            _enemyController.speed += _enemySpeedIncrement;
             level += 1;
+            _uiController.UpdateText(level);
         }
 
         if (_isLaunched == true)
@@ -56,7 +58,7 @@ public class BallController : MonoBehaviour
     {
         if (_isLaunched == false && _uiController.gameIsPaused == false)
         {
-            _rb.AddForce(transform.forward * _arrow.transform.localScale.x * 1000);
+            _rb.velocity = transform.forward * _arrow.transform.localScale.x * _ballSpeed;
             _isLaunched = true;
         }
     }
@@ -81,7 +83,7 @@ public class BallController : MonoBehaviour
         _isLaunched = false;
         _enemy.transform.position = _enemyPos;
         transform.position = _defaultPos;
-        _inputManager.ReturnPlayer();
+        _returnPlayerAvaliable = true;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
     }

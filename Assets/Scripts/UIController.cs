@@ -19,6 +19,7 @@ public class UIController : MonoBehaviour
 
     public void PausePressed()
     {
+        Time.timeScale = 0;
         _pausePanel.SetActive(true);
         _pauseButton.gameObject.SetActive(false);
         gameIsPaused = true;
